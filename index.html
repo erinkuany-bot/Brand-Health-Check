@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>貝納頌 品牌健檢報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCFBF8; --soft:#F2EFE9; --ink:#222019; --ink-2:#4A453D; --muted:#8C857A;
+    --brand:#2E5A53; --brand-d:#1C3A35; --brand-l:#6E948C;
+    --loss:#BC4536; --gold:#C2922F; --hair:#E7E1D7; --card:#FFFFFF;
+    --lat:'Inter',sans-serif; --body:'Noto Sans TC','Inter',sans-serif; --mono:'Space Grotesk','Inter',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono);font-feature-settings:"tnum" 1}
+  .eyebrow{font-family:var(--lat);font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brand)}
+
+  header{padding:48px 0 24px;border-bottom:3px solid var(--brand)}
+  .topbar{display:flex;justify-content:space-between;align-items:center;font-family:var(--lat);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:30px}
+  .topbar .badge{color:var(--brand);font-weight:600}
+  header h1{font-family:var(--body);font-weight:900;font-size:clamp(30px,5.2vw,50px);line-height:1.1;margin:0;letter-spacing:-.01em}
+  header .sub{font-size:16.5px;color:var(--ink-2);margin:12px 0 0;max-width:40em}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:22px;font-size:13px;color:var(--muted)}
+  .meta b{color:var(--ink);font-weight:700}
+
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:46px 0 30px;border-bottom:1px solid var(--hair)}
+  .hero .htext .k{font-size:14px;font-weight:600;color:var(--loss);letter-spacing:.04em;margin-bottom:8px}
+  .hero .htext .big{font-family:var(--mono);font-weight:700;font-size:clamp(60px,11vw,108px);line-height:.85;color:var(--loss);letter-spacing:-.03em}
+  .hero .htext .big small{font-size:.4em;font-weight:700}
+  .hero .htext p{font-size:15.5px;color:var(--ink-2);max-width:24em;margin:18px 0 0}
+  .hero .htext p b{color:var(--loss);font-weight:700}
+  .wallet .wl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:8px}
+  .wallet .wl .g{color:var(--brand);font-weight:700}
+  .wallet .wl .l{color:var(--loss);font-weight:700}
+  .wbar{height:52px;display:flex;border-radius:4px;overflow:hidden}
+  .wbar .g{width:36%;background:var(--brand);color:#fff;display:flex;align-items:center;padding-left:14px;font-family:var(--mono);font-weight:700;font-size:15px}
+  .wbar .l{width:64%;background:var(--loss);color:#fff;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-family:var(--mono);font-weight:700;font-size:15px}
+  .wallet .wn{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+  .finding{padding:44px 0;border-bottom:1px solid var(--hair)}
+  .fhead{display:flex;align-items:baseline;gap:14px;margin-bottom:4px}
+  .fno{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--brand);border:1.5px solid var(--brand);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex:none}
+  .fttl{font-family:var(--body);font-weight:900;font-size:clamp(20px,3vw,27px);margin:0;letter-spacing:-.01em}
+  .fsub{font-size:15px;color:var(--muted);margin:2px 0 26px;padding-left:44px}
+  .fgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:start}
+
+  .panel{background:var(--card);border:1px solid var(--hair);border-top:3px solid var(--brand);border-radius:6px;padding:22px 22px 6px}
+  .panel .plab{font-family:var(--lat);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:6px}
+  .panel .ptxt{font-size:14.5px;color:var(--ink);line-height:1.72;margin:0 0 20px}
+  .panel .ptxt b{color:var(--loss);font-weight:700}
+  .panel .act{border-top:1px dashed var(--hair);padding-top:16px;margin-bottom:18px}
+  .panel .act .plab{color:var(--ink)}
+  .panel .act .ptxt b{color:var(--brand)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+  .tag{font-family:var(--lat);font-size:10.5px;font-weight:600;letter-spacing:.03em;color:var(--brand);background:rgba(46,90,83,.08);border:1px solid rgba(46,90,83,.24);border-radius:20px;padding:3px 10px;white-space:nowrap}
+
+  .rows{margin-top:2px}
+  .r{display:grid;grid-template-columns:78px 1fr 50px;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--hair)}
+  .r:last-child{border-bottom:none}
+  .r .l{font-size:14px;font-weight:500}
+  .r .t{height:13px;background:var(--soft);border-radius:7px;overflow:hidden}
+  .r .f{height:100%;background:var(--brand);border-radius:7px}
+  .r .f.hi{background:var(--loss)}
+  .r .v{font-family:var(--mono);font-weight:600;font-size:13.5px;text-align:right}
+  .r.dim .l,.r.dim .v{color:var(--muted)}
+  .r.dim .f{background:#CFC8BB}
+
+  .gcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .gc{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:14px 12px}
+  .gc .tg{font-family:var(--lat);font-weight:700;font-size:12px;letter-spacing:.03em}
+  .gc.a .tg{color:var(--brand)} .gc.b .tg{color:var(--brand-l)} .gc.c .tg{color:var(--loss)}
+  .gc .pp{font-size:11px;color:var(--muted);margin:2px 0 12px}
+  .gc .bn{font-family:var(--mono);font-weight:700;font-size:27px;line-height:1}
+  .gc .bl{font-size:10.5px;color:var(--muted);margin-top:1px}
+  .gc .sp{margin-top:11px;padding-top:9px;border-top:1px dashed var(--hair);font-size:11px;color:var(--ink-2)}
+  .gc .sp .n{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--ink)}
+  .gc.c .sp .n{color:var(--loss)}
+
+  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--muted);margin-bottom:16px}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend i{width:10px;height:10px;border-radius:2px}
+  .rh{margin-bottom:16px}
+  .rh .t{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .rh .t .nm{font-weight:700;font-size:14px}
+  .rh .t .tk{font-size:12.5px;color:var(--brand);font-weight:500}
+  .seg{height:28px;display:flex;border-radius:4px;overflow:hidden;background:var(--soft)}
+  .seg div{display:flex;align-items:center;justify-content:center;font-size:10.5px;color:#fff;font-family:var(--mono);font-weight:600;white-space:nowrap;overflow:hidden}
+
+  .defs{margin-top:22px;padding:14px 16px;background:var(--soft);border-radius:6px;font-size:11.5px;color:var(--muted);line-height:1.65}
+  .defs .dl{display:block;margin-bottom:4px}
+  .defs .dl:last-child{margin-bottom:0}
+  .defs b{color:var(--ink-2);font-weight:700}
+
+  .takeaway{background:var(--brand-d);color:#EBE7DE;border-radius:8px;padding:34px 32px;margin:48px 0 0}
+  .takeaway .eyebrow{color:var(--gold)}
+  .takeaway p{font-size:clamp(17px,2.3vw,21px);font-weight:500;margin:14px 0 0;line-height:1.6}
+  .takeaway p b{color:#fff}
+  .closing{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .cbox{background:var(--card);border:1px solid var(--hair);border-radius:8px;padding:22px}
+  .cbox h3{font-size:15px;margin:0 0 7px;font-weight:700}
+  .cbox p{font-size:13.5px;color:var(--ink-2);margin:0;line-height:1.65}
+  .cbox.pitch{border-top:3px solid var(--gold)}
+
+  .repwrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  .repcard{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:18px 18px 8px}
+  .repcard h4{font-size:13.5px;margin:0 0 9px;font-weight:700;color:var(--brand)}
+  .repcard p{font-size:12.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.62}
+  .repcard p b{color:var(--ink);font-weight:700}
+  .statrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px solid var(--hair);font-size:12.5px}
+  .statrow:last-child{border-bottom:none}
+  .statrow .sv{font-family:var(--mono);font-weight:700;font-size:14px;text-align:right;white-space:nowrap}
+  .fill{display:inline-block;font-family:var(--lat);font-size:10.5px;font-weight:600;color:#946312;background:#FBF1D8;border:1px dashed #D7B257;border-radius:4px;padding:1px 7px}
+  .reptable{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+  .reptable th{text-align:left;font-weight:600;color:var(--muted);font-size:10.5px;letter-spacing:.04em;border-bottom:1px solid var(--hair);padding:6px 8px}
+  .reptable td{padding:7px 8px;border-bottom:1px solid var(--hair);color:var(--ink-2)}
+  .reptable tr:last-child td{border-bottom:none}
+  .reptable td:first-child{font-weight:600;color:var(--ink)}
+  .method{margin:40px 0 14px;padding:24px 24px 10px;background:var(--soft);border-radius:8px}
+  .method .eyebrow{color:var(--muted)}
+  .method ul{margin:12px 0 0;padding-left:18px}
+  .method li{font-size:12.5px;color:var(--ink-2);margin-bottom:8px;line-height:1.55}
+  .method li b{color:var(--ink)}
+  footer{padding:24px 0 56px;text-align:center;font-size:12px;color:var(--muted)}
+
+  @media (max-width:760px){
+    .hero,.fgrid,.closing{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hero>*{animation:rise .6s ease both}.hero .wallet{animation-delay:.12s}
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="topbar"><span class="badge">消費者購買行為研究</span><span>發票數據 · 全市場樣本</span></div>
+    <h1>貝納頌 品牌健檢</h1>
+    <p class="sub">從全市場的真實消費紀錄，看見你自己的銷售數字看不到的事——你的買家走出店門後，把咖啡錢花到了哪裡。</p>
+    <div class="meta">
+      <span>資料來源 <b>財政部電子發票</b></span>
+      <span>分析期間 <b>近 12 個月</b></span>
+      <span>研究樣本 <b>683,902 位貝納頌買家</b></span>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="htext">
+      <div class="k">核心發現</div>
+      <div class="big">2.8<small>億</small></div>
+      <p>是貝納頌「重度咖啡客」一年流向<b>其他品牌</b>的咖啡錢。最會喝咖啡的這群人，只把一成多的預算留給了貝納頌。</p>
+    </div>
+    <div class="wallet">
+      <div class="wl"><span class="g">貝納頌拿到 36%</span><span class="l">流向別人 64%</span></div>
+      <div class="wbar"><div class="g">2.01億</div><div class="l">3.6億</div></div>
+      <div class="wn">貝納頌買家一年花在咖啡上約 5.63 億，其中只有約三分之一進了貝納頌口袋。</div>
+    </div>
+  </div>
+
+  <div class="defs" style="margin-top:0;border-radius:0 0 6px 6px">
+    <span class="dl"><b>「咖啡錢」定義</b>：一個人一年內，花在所有「即飲咖啡」（罐裝、瓶裝、利樂包等現成可喝的咖啡，含貝納頌與主要競品）的金額；不含手搖與超商現煮。</span>
+    <span class="dl"><b>36%</b>＝全體貝納頌買家「花在貝納頌的咖啡金額（約 2.01 億）」÷「花在所有即飲咖啡的金額（約 5.63 億）」。<b>64%／3.6 億</b>＝其餘流向其他品牌的部分。</span>
+    <span class="dl"><b>2.8 億</b>＝「重度咖啡客（下方第 2 節 C 群）」一年咖啡花費約 3.27 億 ×（1 − 13.5%），即這群人花在貝納頌以外咖啡的金額。</span>
+  </div>
+
+  <section class="finding">
+    <div class="fhead"><span class="fno">1</span><h2 class="fttl">他們在哪裡買貝納頌</h2></div>
+    <p class="fsub">幾乎全在超商</p>
+    <div class="fgrid">
+      <div class="rows">
+        <div class="r"><span class="l">7-ELEVEN</span><span class="t"><span class="f" style="width:39.1%"></span></span><span class="v">39.1%</span></div>
+        <div class="r"><span class="l">全家</span><span class="t"><span class="f" style="width:33.5%"></span></span><span class="v">33.5%</span></div>
+        <div class="r"><span class="l">全聯</span><span class="t"><span class="f" style="width:8%"></span></span><span class="v">8.0%</span></div>
+        <div class="r"><span class="l">萊爾富</span><span class="t"><span class="f" style="width:7.7%"></span></span><span class="v">7.7%</span></div>
+        <div class="r dim"><span class="l">其他通路</span><span class="t"><span class="f" style="width:11.7%"></span></span><span class="v">11.7%</span></div>
+      </div>
+      <div class="panel">
+        <div class="plab">重點發現</div>
+        <p class="ptxt">貝納頌幾乎全靠超商賣——光是 7-11 加全家就佔了七成，四大超商合計接近九成。這是一個徹底的「超商型」品牌，量販、電商目前只是零頭。</p>
+        <div class="act">
+          <div class="plab">建議行動</div>
+          <div class="tags"><span class="tag">通路開拓</span><span class="tag">市場研究</span></div>
+          <p class="ptxt">把資源集中在<b>四大超商的鋪貨密度與陳列</b>是基本盤；量販與電商是還沒被認真經營的空間，可當作開發新場景的測試地——並用發票數據持續盯開發成效。</p>
+        </div>
+      </div>
+    </div>
+    <div class="defs">
+      <span class="dl"><b>類別</b>：「通路」＝開立發票的店家品牌；「其他通路」＝四大超商以外（量販、百貨、電商、藥妝等）的合計。</span>
+      <span class="dl"><b>數字</b>：百分比＝該通路的「貝納頌發票張數」÷「貝納頌總發票張數（335 萬張）」。</span>
+    </div>
+  </section>
+
+  <section class="finding">
+    <div class="fhead"><span class="fno">2</span><h2 class="fttl">在他的咖啡花費裡，貝納頌拿到多少</h2></div>
+    <p class="fsub">最忠誠的人花得少，花最多的人最不忠誠</p>
+    <div class="fgrid">
+      <div>
+        <div class="gcards">
+          <div class="gc a"><div class="tg">A 死忠</div><div class="pp">33.5 萬人 · 49%</div><div class="bn">95.8%</div><div class="bl">幾乎只喝貝納頌</div><div class="sp">一年咖啡花費<br><span class="n">422</span> 元</div></div>
+          <div class="gc b"><div class="tg">B 中間</div><div class="pp">16.5 萬人 · 24%</div><div class="bn">48.8%</div><div class="bl">一半給貝納頌</div><div class="sp">一年咖啡花費<br><span class="n">571</span> 元</div></div>
+          <div class="gc c"><div class="tg">C 游離</div><div class="pp">18.4 萬人 · 27%</div><div class="bn">13.5%</div><div class="bl">只給一成多</div><div class="sp">一年咖啡花費<br><span class="n">1,775</span> 元</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="plab">重點發現</div>
+        <p class="ptxt">一件反直覺的事：最死忠的 A 群其實咖啡喝得不多；而<b>真正咖啡喝最兇的 C 群（一年花 1,775 元，是 A 群的四倍多），卻只把一成多留給貝納頌。</b>最該成為大客戶的人，買貝納頌買最少。</p>
+        <div class="act">
+          <div class="plab">建議行動</div>
+          <div class="tags"><span class="tag">廣告受眾包</span><span class="tag">會員經營</span></div>
+          <p class="ptxt">與其對已經很忠誠的 A 群再加碼，不如把力氣放到 <b>C 群這 18 萬人</b>。這群人可以整理成<b>可直接投放的受眾名單</b>，或寫成<b>標籤回你的會員系統</b>，用優惠、嘗鮮組合，把他們留給貝納頌的比例往上拉一點，金額效果就很可觀。</p>
+        </div>
+      </div>
+    </div>
+    <div class="defs">
+      <span class="dl"><b>分群方式</b>：依「貝納頌金額占此人一年即飲咖啡總花費的比例」分三群——<b>A 死忠</b> ≥ 70%、<b>B 中間</b> 30–70%、<b>C 游離</b> &lt; 30%。</span>
+      <span class="dl"><b>群組大數字（95.8% 等）</b>＝該群「貝納頌金額 ÷ 咖啡總金額」的平均比例。<b>一年咖啡花費</b>＝該群每人平均一年花在所有即飲咖啡的金額。<b>人數％</b>＝該群人數 ÷ 全體貝納頌買家。</span>
+    </div>
+  </section>
+
+  <section class="finding">
+    <div class="fhead"><span class="fno">3</span><h2 class="fttl">同一個人，還會買哪些牌子</h2></div>
+    <p class="fsub">最常被一起買的，是左岸——不是伯朗</p>
+    <div class="fgrid">
+      <div class="rows">
+        <div class="r"><span class="l">左岸</span><span class="t"><span class="f hi" style="width:95%"></span></span><span class="v">27.5%</span></div>
+        <div class="r"><span class="l">其他小牌</span><span class="t"><span class="f" style="width:99%"></span></span><span class="v">28.8%</span></div>
+        <div class="r"><span class="l">伯朗</span><span class="t"><span class="f" style="width:84%"></span></span><span class="v">24.2%</span></div>
+        <div class="r"><span class="l">UCC</span><span class="t"><span class="f" style="width:75%"></span></span><span class="v">21.8%</span></div>
+        <div class="r dim"><span class="l">韋恩</span><span class="t"><span class="f" style="width:9%"></span></span><span class="v">2.7%</span></div>
+        <div class="r dim"><span class="l">雀巢</span><span class="t"><span class="f" style="width:8%"></span></span><span class="v">2.2%</span></div>
+      </div>
+      <div class="panel">
+        <div class="plab">重點發現</div>
+        <p class="ptxt">直覺會以為市佔最大的伯朗是頭號對手，但數據顯示，最常跟貝納頌「被同一個人一起買」的是<b>左岸</b>——而左岸和貝納頌都是統一自家的牌子。<b>最大的對手其實在自己家裡。</b></p>
+        <div class="act">
+          <div class="plab">建議行動</div>
+          <div class="tags"><span class="tag">品牌策略</span><span class="tag">市場研究</span></div>
+          <p class="ptxt">重新檢視貝納頌和左岸的<b>定位、價格帶、上架位置</b>是不是在搶同一批人，把兩個品牌的角色分清楚，避免自己人打自己人。要看錢實際怎麼流動，可再做<b>品牌間的金額流向分析</b>。</p>
+        </div>
+      </div>
+    </div>
+    <div class="defs">
+      <span class="dl"><b>類別</b>：各為即飲咖啡品牌；「其他小牌」＝西雅圖、曼仕德、廣吉等較小品牌的合計。</span>
+      <span class="dl"><b>數字</b>＝「貝納頌買家中，過去一年也買過該品牌至少一次的人數」÷「全體貝納頌買家（68.4 萬人）」。一個人可同時算進多個品牌，故各列加總會超過 100%。此為「有沒有一起買過」，反映接觸、非金額。</span>
+    </div>
+  </section>
+
+  <section class="finding">
+    <div class="fhead"><span class="fno">4</span><h2 class="fttl">他們什麼時候、在哪種店買</h2></div>
+    <p class="fsub">同一罐咖啡，三種不同的生活場景</p>
+    <div class="fgrid">
+      <div>
+        <div class="legend">
+          <span><i style="background:var(--gold)"></i>早上 5–10</span>
+          <span><i style="background:#9C7E4A"></i>中午 11–14</span>
+          <span><i style="background:var(--brand)"></i>下午 15–18</span>
+          <span><i style="background:var(--brand-d)"></i>晚上 19–23</span>
+          <span><i style="background:#B8B2A8"></i>深夜 0–4</span>
+        </div>
+        <div class="rh">
+          <div class="t"><span class="nm">便利商店</span><span class="tk">上班通勤一杯</span></div>
+          <div class="seg"><div style="width:42.7%;background:var(--gold)">42.7%</div><div style="width:20.6%;background:#9C7E4A">20.6</div><div style="width:16.1%;background:var(--brand)">16.1</div><div style="width:15.6%;background:var(--brand-d)">15.6</div><div style="width:5%;background:#B8B2A8"></div></div>
+        </div>
+        <div class="rh">
+          <div class="t"><span class="nm">連鎖超市</span><span class="tk">下午順手帶</span></div>
+          <div class="seg"><div style="width:20.7%;background:var(--gold)">20.7</div><div style="width:24%;background:#9C7E4A">24.0</div><div style="width:29.3%;background:var(--brand)">29.3%</div><div style="width:25.5%;background:var(--brand-d)">25.5</div><div style="width:0.5%;background:#B8B2A8"></div></div>
+        </div>
+        <div class="rh">
+          <div class="t"><span class="nm">大型量販</span><span class="tk">假日／下班囤貨</span></div>
+          <div class="seg"><div style="width:10.3%;background:var(--gold)">10.3</div><div style="width:27.4%;background:#9C7E4A">27.4</div><div style="width:30.8%;background:var(--brand)">30.8%</div><div style="width:29.3%;background:var(--brand-d)">29.3</div><div style="width:2.2%;background:#B8B2A8"></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="plab">重點發現</div>
+        <p class="ptxt">同樣一罐貝納頌，在不同店是完全不同的場景：在<b>超商，超過四成是早上買的</b>，是「上班通勤一杯」；在超市偏下午順手帶；在量販則是下午到晚上、一次扛多罐的囤貨。</p>
+        <div class="act">
+          <div class="plab">建議行動</div>
+          <div class="tags"><span class="tag">情境行銷</span><span class="tag">會員經營</span></div>
+          <p class="ptxt">對準最大的「<b>超商晨間</b>」場景，做咖啡＋早餐組合、用通勤情境溝通；量販則用箱購、檔期促銷對準囤貨客。不同場景的客群也可分別圈成名單，做差異化溝通。</p>
+        </div>
+      </div>
+    </div>
+    <div class="defs">
+      <span class="dl"><b>類別</b>：「通路類型」由店家品牌歸類；「時段」依發票上的時間（小時）分為早上 5–10、中午 11–14、下午 15–18、晚上 19–23、深夜 0–4。</span>
+      <span class="dl"><b>數字</b>＝「該通路類型內、該時段的發票張數」÷「該通路類型的總發票張數」，故每一條橫列自己加總為 100%（看的是該通路的時段分布，不是通路之間的大小比較）。</span>
+    </div>
+  </section>
+
+  <div class="takeaway">
+    <span class="eyebrow">一句話總結</span>
+    <p>即飲咖啡的買家其實很像同一群人——差別不在「他們是誰」，而在<b>「他們把錢給了誰」</b>。貝納頌的戰場不在搶新客群，而在<b>把現有買家的咖啡錢，更多留在自己這裡</b>。</p>
+  </div>
+
+  <div class="closing">
+    <div class="cbox">
+      <h3>這份報告能怎麼用</h3>
+      <p>它告訴你貝納頌的買家此刻長什麼樣、錢漏去了哪。每一節右邊的建議都可以直接變成行銷或通路的下一步動作，對應的執行工具（受眾名單、會員標籤、通路與品牌研究）都能由發票數據支援。</p>
+    </div>
+    <div class="cbox pitch">
+      <h3>下一步：從快照到持續追蹤</h3>
+      <div class="tags"><span class="tag">訂閱戰情室</span><span class="tag">持續監測</span></div>
+      <p>以上都是「現在這一刻」的切片。游離客本季流失多少、流向誰、比上季變多還變少，需要持續監測——這正是訂閱式市場儀表盤的價值，而不是一次性報告能提供的。</p>
+    </div>
+  </div>
+
+  <section class="finding" style="border-top:1px solid var(--hair)">
+    <div class="fhead"><span class="fno" style="font-size:14px">✓</span><h2 class="fttl">關於這份數據的代表性</h2></div>
+    <p class="fsub">任何市場研究的第一個問題：這個樣本，能代表市場嗎？</p>
+
+    <div class="repwrap">
+      <div class="repcard">
+        <h4>數據的本質</h4>
+        <p>本研究的基礎是消費者實際付錢的電子發票，不是問卷意見或網路足跡。三個特性：<b>真實</b>（已發生的交易，不會說謊）、<b>跨品牌</b>（看得到同一個人在不同品牌與通路的全貌）、<b>具規模</b>（涵蓋大量可歸戶的真實消費者）。</p>
+        <div class="statrow"><span>全台發票消費者面板（可歸戶）</span><span class="sv"><span class="fill">待填 萬人</span></span></div>
+        <div class="statrow"><span>本研究貝納頌買家</span><span class="sv">683,902 人</span></div>
+        <div class="statrow"><span>分析期間貝納頌發票</span><span class="sv">335 萬張</span></div>
+      </div>
+
+      <div class="repcard">
+        <h4>市場涵蓋率</h4>
+        <p>涵蓋率＝本資料一年的發票張數 ÷ 全台一年發票總張數（分母採財政部公布數）。涵蓋率越高，越能代表整體市場、而非單一來源的局部樣本。</p>
+        <div class="statrow"><span>本資料年發票張數</span><span class="sv"><span class="fill">待填</span></span></div>
+        <div class="statrow"><span>全台年發票張數（財政部）</span><span class="sv"><span class="fill">待填</span></span></div>
+        <div class="statrow"><span>估計涵蓋率</span><span class="sv"><span class="fill">待填 %</span></span></div>
+      </div>
+    </div>
+
+    <div class="repcard" style="margin-top:16px">
+      <h4>結構代表性：與全台人口比對</h4>
+      <p>除了「量夠不夠」，還要看「結構像不像」。把本面板的組成與全台母體（內政部人口統計）比對；若有系統性偏移（例如偏年輕、偏都會），解讀時需校正或加權。</p>
+      <table class="reptable">
+        <tr><th>維度</th><th>本面板</th><th>全台母體</th><th>落差／處理方式</th></tr>
+        <tr><td>性別</td><td><span class="fill">待填</span></td><td><span class="fill">待填</span></td><td><span class="fill">待填</span></td></tr>
+        <tr><td>年齡分布</td><td><span class="fill">待填</span></td><td><span class="fill">待填</span></td><td><span class="fill">待填</span></td></tr>
+        <tr><td>地區（北/中/南/東）</td><td><span class="fill">待填</span></td><td><span class="fill">待填</span></td><td><span class="fill">待填</span></td></tr>
+      </table>
+    </div>
+
+    <div class="defs">
+      <span class="dl"><b>已知的限制與盲區（誠實揭露）</b></span>
+      <span class="dl">· 只看得到「開立電子發票且綁定載具」的消費；純現金、未開發票、傳統市場與攤商會被低估。</span>
+      <span class="dl">· 樣本偏向發票 App／載具的使用者，可能偏年輕、偏都會、偏數位活躍，對部分品類的代表性需留意。</span>
+      <span class="dl">· 全文「購買人數」為可歸戶者，是保守下限；實際購買人口只多不少。</span>
+      <span class="dl"><b>代表性越完整，結論越能從「參考」升級為「決策依據」。</b>正式對外前，請補齊上方涵蓋率與結構比對的實際數字。</span>
+    </div>
+  </section>
+
+  <div class="method">
+    <span class="eyebrow">資料與口徑說明</span>
+    <ul>
+      <li><b>購買人數為保守值</b>：僅計入可歸戶到個人的買家（有載具者），無載具的紙本購買不計入人數，故實際購買人口只多不少。</li>
+      <li><b>「咖啡花費」</b>指即飲咖啡（貝納頌與主要競品），不含手搖、現煮，以確保各品牌可比較。</li>
+      <li><b>第 4 節已排除</b>電商、訂閱、繳費等通路，因其發票時間是開票時間、不等於消費當下；分析期間為近 6 個月。</li>
+      <li><b>競品重疊</b>為「一年內是否一起購買」，反映接觸而非金額；金額流向為後續可深化項目。</li>
+    </ul>
+  </div>
+
+  <footer>貝納頌 品牌健檢報告 · 基於財政部電子發票數據 · 試作版本</footer>
+</div>
+</body>
+</html>
